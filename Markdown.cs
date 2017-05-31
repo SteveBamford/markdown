@@ -127,7 +127,7 @@ public static class Markdown
         return result;
     }
 
-    public static string Parse(string markdown)
+    internal static string Parse(string markdown)
     {
         var lines = markdown.Split('\n');
         var result = "";
