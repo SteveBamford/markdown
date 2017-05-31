@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 public static class Markdown
@@ -130,6 +132,12 @@ public static class Markdown
     internal static string Parse(string markdown)
     {
         var lines = markdown.Split('\n');
+        return ParseLines(lines);
+
+    }
+
+    private static string ParseLines(string[] lines)
+    {
         var result = "";
         var list = false;
 
@@ -147,5 +155,10 @@ public static class Markdown
         {
             return result;
         }
+    }
+
+    internal static string ParseLines(IEnumerable<string> lines)
+    {
+        return ParseLines(lines.ToArray());
     }
 }
