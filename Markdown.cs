@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public static class Markdown
+//TODO Remove this class
+public static class MarkdownStaticToBeRemoved
 {
     private static string Wrap(string text, string tag) => "<" + tag + ">" + text + "</" + tag + ">";
 
@@ -107,7 +108,7 @@ public static class Markdown
         }
     }
 
-    private static string ParseLine(string markdown, bool list, out bool inListAfter)
+    public static string ParseLine(string markdown, bool list, out bool inListAfter)
     {
         var result = ParseHeader(markdown, list, out inListAfter);
 

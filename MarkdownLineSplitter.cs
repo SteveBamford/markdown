@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class MarkdownLineSplitter : IMarkdownLineSplitter
+namespace Markdown
 {
-    public IEnumerable<string> Split(string markdownText)
+    public class MarkdownLineSplitter : IMarkdownLineSplitter
     {
-        return markdownText.Split('\n');
+        public IEnumerable<string> Split(string markdownText)
+        {
+            return markdownText.Split('\n');
+        }
     }
 }

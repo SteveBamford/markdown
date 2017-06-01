@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Markdown
 {
-    public interface IMarkdownParser
+    public interface IMarkdownLineParser
     {
-        string Parse(string markdown);
+        string ParseLines(IEnumerable<string> markdownLines);
     }
 }
+
