@@ -19,25 +19,20 @@ namespace Markdown
 
         protected string ParseTextForUnorderedListEndBoldAndItalic(string markdownText, bool inListBefore)
         {
-            bool inListAfter;
             return ParseTextForBoldAndItalic(
                 _unorderedListEndParser.ParseElement(
                     markdownText,
-                    inListBefore,
-                    out inListAfter), 
+                    inListBefore).ParsedText, 
                 inListBefore);
         }
 
         protected string ParseTextForBoldAndItalic(string markdownText, bool inListBefore)
         {
-            bool inListAfter;
             return _italicTextParser.ParseElement(
                     _boldTextParser.ParseElement(
                         markdownText,
-                        false,
-                        out inListAfter),
-                    false,
-                    out inListAfter);
+                        false).ParsedText,
+                    false).ParsedText;
         }
 
     }

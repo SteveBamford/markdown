@@ -24,23 +24,30 @@ namespace Markdown
         {
             string result = null;
             bool inList = false;
-            string lineResult = null;
+            LineParserResult lineResult = null;
             foreach (var line in markdownLines)
             {
                 foreach (var parserElement in _lineParserElements)
                 {
-                    lineResult = parserElement.ParseElement(line, inList, out inList);
-                    if (lineResult != null)
+                    lineResult = parserElement.ParseElement(line, inList);
+                    if (lineResult.ParsedText != null)
                     {
+                        inList = lineResult.InList;
                         break;
                     }
                 }
-                if (lineResult.Equals(line))
+                if (lineResult == null)
+                {
+                    throw new ArgumentException("No line parser elements run.");
+                }
+                else if (lineResult.ParsedText.Equals(line))
+                {
                     throw new ArgumentException("Invalid markdown");
-                result += lineResult;
+                }
+                result += lineResult.ParsedText;
             }
 
-            result += _listEndParserElement.ParseElement("", inList, out inList);
+            result += _listEndParserElement.ParseElement("", inList).ParsedText;
             return result;
 
         }

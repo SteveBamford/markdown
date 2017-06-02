@@ -9,10 +9,9 @@ namespace Markdown
         private const string BOLD_MARKDOWN_TEXT = "__";
         private const string BOLD_REPLACEMENT_TEXT = "strong";
 
-        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
-            inListAfterLine = inListBeforeLine;
-            return Parse(markdownLine, BOLD_MARKDOWN_TEXT, BOLD_REPLACEMENT_TEXT);
+            return new LineParserResult(Parse(markdownLine, BOLD_MARKDOWN_TEXT, BOLD_REPLACEMENT_TEXT), inListBeforeLine);
         }
     }
 }

@@ -16,18 +16,16 @@ namespace Markdown
             _startTagger = new UnorderedListStartLineParserElement();
         }
 
-        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
 
             if (markdownLine.StartsWith(UNORDERED_LIST_MARKDOWN_TEXT))
             {
                 
-                var result = _startTagger.ParseElement(WrapTextInTag(ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine), UNORDERED_LIST_LINE_ITEM_TAG_TEXT), inListBeforeLine, out inListAfterLine);
-                inListAfterLine = true;
-                return result;
+                var result = _startTagger.ParseElement(WrapTextInTag(ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine), UNORDERED_LIST_LINE_ITEM_TAG_TEXT), inListBeforeLine);
+                return new LineParserResult(result.ParsedText, true);
             }
-            inListAfterLine = inListBeforeLine;
-            return null;
+            return new LineParserResult(null, inListBeforeLine);
         }
     }
 }

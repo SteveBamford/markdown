@@ -6,14 +6,13 @@ namespace Markdown
 {
     public class HeaderLineParserElement : LineParserElementBase
     {
-        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
             int headerCount = GetHeaderCount(markdownLine);
 
             if (headerCount == 0)
             {
-                inListAfterLine = inListBeforeLine;
-                return null;
+                return new LineParserResult(null, inListBeforeLine);
             }
 
             var headerTag = "h" + headerCount;
@@ -21,13 +20,11 @@ namespace Markdown
 
             if (inListBeforeLine)
             {
-                inListAfterLine = false;
-                return _listEndParserElement.ParseElement("", true, out inListAfterLine) + headerHtml;
+                return new LineParserResult(_listEndParserElement.ParseElement("", true).ParsedText + headerHtml, false);
             }
             else
             {
-                inListAfterLine = false;
-                return headerHtml;
+                return new LineParserResult(headerHtml, false);
             }
         }
 

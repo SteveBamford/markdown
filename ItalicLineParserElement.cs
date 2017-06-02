@@ -9,10 +9,11 @@ namespace Markdown
         private const string ITALIC_MARKDOWN_TEXT = "_";
         private const string ITALIC_REPLACEMENT_TEXT = "em";
 
-        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
-            inListAfterLine = inListBeforeLine;
-            return Parse(markdownLine, ITALIC_MARKDOWN_TEXT, ITALIC_REPLACEMENT_TEXT);
+            return new LineParserResult(
+                Parse(markdownLine, ITALIC_MARKDOWN_TEXT, ITALIC_REPLACEMENT_TEXT),
+                inListBeforeLine);
         }
     }
 }

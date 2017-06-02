@@ -8,11 +8,9 @@ namespace Markdown
     {
         public const string PARAGRAPH_TAG_TEXT = "p";
 
-        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
             string parsedLine = markdownLine;
-
-            inListAfterLine = false;
 
             parsedLine = ParseTextForUnorderedListEndBoldAndItalic(markdownLine, inListBeforeLine);
 
@@ -20,7 +18,7 @@ namespace Markdown
             {
                 parsedLine = WrapTextInTag(parsedLine, PARAGRAPH_TAG_TEXT);
             }
-            return parsedLine;
+            return new LineParserResult(parsedLine, false);
         }
 
     }

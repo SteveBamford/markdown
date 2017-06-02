@@ -6,7 +6,7 @@ namespace Markdown
 {
     public interface ILineParserElement
     {
-        string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine);
+        LineParserResult ParseElement(string markdownLine, bool inListBeforeLine);
     }
 }
 

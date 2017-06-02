@@ -8,14 +8,13 @@ namespace Markdown
     {
         private const string LIST_START_TEXT = "<ul>";
 
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
-            inListAfterLine = inListBeforeLine;
             if (!inListBeforeLine)
             {
-                return $"{LIST_START_TEXT}{markdownLine}";
+                return new LineParserResult($"{LIST_START_TEXT}{markdownLine}", inListBeforeLine);
             }
-            return markdownLine;
+            return new LineParserResult(markdownLine, inListBeforeLine);
         }
     }
 }

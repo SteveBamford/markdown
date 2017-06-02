@@ -11,14 +11,13 @@ namespace Markdown
         public UnorderedListEndLineParserElement() : base()
         { }
 
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
-            inListAfterLine = false;
             if (inListBeforeLine)
             {
-                return $"{LIST_END_TEXT}{markdownLine}";
+                return new LineParserResult($"{LIST_END_TEXT}{markdownLine}", false);
             }
-            return markdownLine;
+            return new LineParserResult(markdownLine, false);
         }
     }
 }

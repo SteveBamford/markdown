@@ -15,18 +15,15 @@ namespace Markdown
         [Fact]
         public void Parses_single_underscore_to_same_text()
         {
-            bool inListAfter = true;
-
-            Assert.Equal("_", _sut.ParseElement("_", false, out inListAfter));
+            Assert.Equal("_", _sut.ParseElement("_", false).ParsedText);
         }
 
         [Fact]
         public void Parses_text_surrounded_by_underscores_to_text_surrounded_by_em()
         {
-            bool inListAfter = true;
             string text = "some text";
 
-            Assert.Equal($"<em>{text}</em>", _sut.ParseElement($"_{text}_", false, out inListAfter));
+            Assert.Equal($"<em>{text}</em>", _sut.ParseElement($"_{text}_", false).ParsedText);
         }
     }
 }

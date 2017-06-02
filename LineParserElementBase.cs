@@ -18,7 +18,7 @@ namespace Markdown
             _listEndParserElement = listEndParserElement;
         }
 
-        public abstract string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine);
+        public abstract LineParserResult ParseElement(string markdownLine, bool inListBeforeLine);
 
         protected string WrapTextInTag(string text, string tag)
         {
