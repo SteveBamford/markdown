@@ -12,6 +12,8 @@ namespace Markdown
             _sut = new MarkdownParser();
         }
 
+        #region Integration Tests
+
         [Fact]
         public void Parses_normal_text_as_a_paragraph()
         {
@@ -83,5 +85,8 @@ namespace Markdown
             var expected = "<h1>Header!</h1><ul><li><strong>Bold Item</strong></li><li><em>Italic Item</em></li></ul>";
             Assert.Equal(expected, _sut.Parse(input));
         }
+
+        #endregion Integration Tests
+
     }
 }

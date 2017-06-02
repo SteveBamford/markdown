@@ -4,13 +4,24 @@ using System.Text;
 
 namespace Markdown
 {
-    //TODO Move common functionality into abstract base class
-    public class ParagraphLineParserElement : ILineParserElement
+    public class ParagraphLineParserElement : LineParserElementTextBase
     {
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public const string PARAGRAPH_TAG_TEXT = "p";
+
+        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
-            //TODO Implement paragraph logic
-            throw new NotImplementedException();
+            string parsedLine = markdownLine;
+
+            inListAfterLine = false;
+
+            parsedLine = ParseTextForUnorderedListEndBoldAndItalic(markdownLine, inListBeforeLine);
+
+            if (!inListBeforeLine)
+            {
+                parsedLine = WrapTextInTag(parsedLine, PARAGRAPH_TAG_TEXT);
+            }
+            return parsedLine;
         }
+
     }
 }

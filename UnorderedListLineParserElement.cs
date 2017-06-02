@@ -4,13 +4,20 @@ using System.Text;
 
 namespace Markdown
 {
-    //TODO Move common functionality into abstract base class
-    public class UnorderedListLineParserElement : ILineParserElement
+    public class UnorderedListLineParserElement : LineParserElementBase
     {
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public const string UNORDERED_LIST_START_TAG = "<ul>";
+        public const string UNORDERED_LIST_END_TAG = "</ul>";
+
+        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
-            //TODO Implement unordered list logic
-            throw new NotImplementedException();
+            inListAfterLine = inListBeforeLine;
+
+            if (inListBeforeLine)
+            {
+                return $"{UNORDERED_LIST_START_TAG}{markdownLine}";
+            }
+            return markdownLine;
         }
     }
 }

@@ -4,12 +4,11 @@ using System.Text;
 
 namespace Markdown
 {
-    //TODO Use abstract base class
-    public class ListEndLineParserElement : ILineParserElement
+    public class ListEndLineParserElement : LineParserElementBase
     {
         private const string LIST_END_TEXT = "</ul>";
 
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
             inListAfterLine = false;
             if (inListBeforeLine)

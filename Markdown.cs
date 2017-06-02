@@ -96,16 +96,18 @@ public static class MarkdownStaticToBeRemoved
 
     private static string ParseParagraph(string markdown, bool list, out bool inListAfter)
     {
-        if (!list)
-        {
-            inListAfter = false;
-            return ParseText(markdown, list);
-        }
-        else
-        {
-            inListAfter = false;
-            return "</ul>" + ParseText(markdown, list);
-        }
+        //if (!list)
+        //{
+        //    inListAfter = false;
+        //    return ParseText(markdown, list);
+        //}
+        //else
+        //{
+        //    inListAfter = false;
+        //    return "</ul>" + ParseText(markdown, list);
+        //}
+        var paragraphParser = new Markdown.ParagraphLineParserElement();
+        return paragraphParser.ParseElement(markdown, list, out inListAfter);
     }
 
     public static string ParseLine(string markdown, bool list, out bool inListAfter)
