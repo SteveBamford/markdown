@@ -7,6 +7,17 @@ namespace Markdown
 {
     public abstract class LineParserElementBase : ILineParserElement
     {
+        protected ILineParserElement _listEndParserElement;
+
+        public LineParserElementBase() : this(new ListEndLineParserElement())
+        {
+        }
+
+        public LineParserElementBase(ILineParserElement listEndParserElement)
+        {
+            _listEndParserElement = listEndParserElement;
+        }
+
         public abstract string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine);
 
         protected string WrapTextInTag(string text, string tag)

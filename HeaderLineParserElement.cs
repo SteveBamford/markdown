@@ -4,13 +4,50 @@ using System.Text;
 
 namespace Markdown
 {
-    //TODO Move common functionality into abstract base class
-    public class HeaderLineParserElement : ILineParserElement
+    public class HeaderLineParserElement : LineParserElementBase
     {
-        public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
+        public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
-            //TODO Implement header logic
-            throw new NotImplementedException();
+            int headerCount = GetHeaderCount(markdownLine);
+
+            if (headerCount == 0)
+            {
+                inListAfterLine = inListBeforeLine;
+                return null;
+            }
+
+            var headerTag = "h" + headerCount;
+            var headerHtml = WrapTextInTag(markdownLine.Substring(headerCount + 1), headerTag);
+
+            if (inListBeforeLine)
+            {
+                inListAfterLine = false;
+                return _listEndParserElement.ParseElement("", true, out inListAfterLine) + headerHtml;
+            }
+            else
+            {
+                inListAfterLine = false;
+                return headerHtml;
+            }
+        }
+
+        private static int GetHeaderCount(string markdownLine)
+        {
+            var count = 0;
+
+            for (int i = 0; i < markdownLine.Length; i++)
+            {
+                if (markdownLine[i] == '#')
+                {
+                    count += 1;
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return count;
         }
     }
 }

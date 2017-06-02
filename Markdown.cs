@@ -37,39 +37,41 @@ public static class MarkdownStaticToBeRemoved
 
     private static string ParseHeader(string markdown, bool list, out bool inListAfter)
     {
-        var count = 0;
+        //var count = 0;
 
-        for (int i = 0; i < markdown.Length; i++)
-        {
-            if (markdown[i] == '#')
-            {
-                count += 1;
-            }
-            else
-            {
-                break;
-            }
-        }
+        //for (int i = 0; i < markdown.Length; i++)
+        //{
+        //    if (markdown[i] == '#')
+        //    {
+        //        count += 1;
+        //    }
+        //    else
+        //    {
+        //        break;
+        //    }
+        //}
 
-        if (count == 0)
-        {
-            inListAfter = list;
-            return null;
-        }
+        //if (count == 0)
+        //{
+        //    inListAfter = list;
+        //    return null;
+        //}
 
-        var headerTag = "h" + count;
-        var headerHtml = Wrap(markdown.Substring(count + 1), headerTag);
+        //var headerTag = "h" + count;
+        //var headerHtml = Wrap(markdown.Substring(count + 1), headerTag);
 
-        if (list)
-        {
-            inListAfter = false;
-            return "</ul>" + headerHtml;
-        }
-        else
-        {
-            inListAfter = false;
-            return headerHtml;
-        }
+        //if (list)
+        //{
+        //    inListAfter = false;
+        //    return "</ul>" + headerHtml;
+        //}
+        //else
+        //{
+        //    inListAfter = false;
+        //    return headerHtml;
+        //}
+        var headerParser = new Markdown.HeaderLineParserElement();
+        return headerParser.ParseElement(markdown, list, out inListAfter);
     }
 
     private static string ParseLineItem(string markdown, bool list, out bool inListAfter)
