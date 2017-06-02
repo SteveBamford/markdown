@@ -4,20 +4,30 @@ using System.Text;
 
 namespace Markdown
 {
-    public class UnorderedListLineParserElement : LineParserElementBase
+    public class UnorderedListLineParserElement : LineParserElementTextBase
     {
-        public const string UNORDERED_LIST_START_TAG = "<ul>";
-        public const string UNORDERED_LIST_END_TAG = "</ul>";
+        public const string UNORDERED_LIST_MARKDOWN_TEXT = "*";
+        public const string UNORDERED_LIST_LINE_ITEM_TAG_TEXT = "li";
+
+        private UnorderedListStartLineParserElement _startTagger;
+
+        public UnorderedListLineParserElement()
+        {
+            _startTagger = new UnorderedListStartLineParserElement();
+        }
 
         public override string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
-            inListAfterLine = inListBeforeLine;
 
-            if (inListBeforeLine)
+            if (markdownLine.StartsWith(UNORDERED_LIST_MARKDOWN_TEXT))
             {
-                return $"{UNORDERED_LIST_START_TAG}{markdownLine}";
+                
+                var result = _startTagger.ParseElement(WrapTextInTag(ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine), UNORDERED_LIST_LINE_ITEM_TAG_TEXT), inListBeforeLine, out inListAfterLine);
+                inListAfterLine = true;
+                return result;
             }
-            return markdownLine;
+            inListAfterLine = inListBeforeLine;
+            return null;
         }
     }
 }

@@ -16,9 +16,9 @@ namespace Markdown
             inListAfterLine = false;
             if (inListBeforeLine)
             {
-                return LIST_END_TEXT;
+                return $"{LIST_END_TEXT}{markdownLine}";
             }
-            return null;
+            return markdownLine;
         }
     }
 }

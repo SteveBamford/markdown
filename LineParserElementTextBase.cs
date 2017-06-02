@@ -8,27 +8,35 @@ namespace Markdown
     {
         private BoldLineParserElement _boldTextParser;
         private ItalicLineParserElement _italicTextParser;
-        private UnorderedListStartLineParserElement _unorderedListStartParser;
+        private UnorderedListEndLineParserElement _unorderedListEndParser;
 
         public LineParserElementTextBase()
         {
             _boldTextParser = new BoldLineParserElement();
             _italicTextParser = new ItalicLineParserElement();
-            _unorderedListStartParser = new UnorderedListStartLineParserElement();
+            _unorderedListEndParser = new UnorderedListEndLineParserElement();
         }
 
         protected string ParseTextForUnorderedListEndBoldAndItalic(string markdownText, bool inListBefore)
         {
             bool inListAfter;
+            return ParseTextForBoldAndItalic(
+                _unorderedListEndParser.ParseElement(
+                    markdownText,
+                    inListBefore,
+                    out inListAfter), 
+                inListBefore);
+        }
+
+        protected string ParseTextForBoldAndItalic(string markdownText, bool inListBefore)
+        {
+            bool inListAfter;
             return _italicTextParser.ParseElement(
                     _boldTextParser.ParseElement(
-                            _unorderedListStartParser.ParseElement(
-                                markdownText,
-                                inListBefore,
-                                out inListAfter),
-                            false, 
-                            out inListAfter), 
-                    false, 
+                        markdownText,
+                        false,
+                        out inListAfter),
+                    false,
                     out inListAfter);
         }
 

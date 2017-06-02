@@ -28,12 +28,12 @@ namespace Markdown
         }
 
         [Fact]
-        public void Parse_simple_line_in_list_to_simple_line_starting_with_list_tag()
+        public void Parse_simple_line_in_list_to_simple_line_starting_with_list_end_tag()
         {
             bool inListBefore = true;
             bool inListAfter;
             string simpleLine = "She sells sea shells on the sea shore.";
-            string expectedResult = $"{UNORDERED_LIST_START_TAG}{simpleLine}";
+            string expectedResult = $"{UNORDERED_LIST_END_TAG}{simpleLine}";
             Assert.Equal(expectedResult, _sut.ParseElement(simpleLine, inListBefore, out inListAfter));
             Assert.False(inListAfter);
         }

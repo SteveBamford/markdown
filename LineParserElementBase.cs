@@ -27,6 +27,8 @@ namespace Markdown
 
         protected string Parse(string markdownText, string delimiter, string tag)
         {
+            if (markdownText == null || markdownText.Length == 0)
+                return markdownText;
             var pattern = $"{delimiter}(.+){delimiter}";
             var replacement = $"<{tag}>$1</{tag}>";
             return Regex.Replace(markdownText, pattern, replacement);

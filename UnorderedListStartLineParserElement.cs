@@ -11,7 +11,7 @@ namespace Markdown
         public string ParseElement(string markdownLine, bool inListBeforeLine, out bool inListAfterLine)
         {
             inListAfterLine = inListBeforeLine;
-            if (inListBeforeLine)
+            if (!inListBeforeLine)
             {
                 return $"{LIST_START_TEXT}{markdownLine}";
             }

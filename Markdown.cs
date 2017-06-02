@@ -76,24 +76,27 @@ public static class MarkdownStaticToBeRemoved
 
     private static string ParseLineItem(string markdown, bool list, out bool inListAfter)
     {
-        if (markdown.StartsWith("*"))
-        {
-            var innerHtml = Wrap(ParseText(markdown.Substring(2), true), "li");
+        //if (markdown.StartsWith("*"))
+        //{
+        //    var innerHtml = Wrap(ParseText(markdown.Substring(2), true), "li");
 
-            if (list)
-            {
-                inListAfter = true;
-                return innerHtml;
-            }
-            else
-            {
-                inListAfter = true;
-                return "<ul>" + innerHtml;
-            }
-        }
+        //    if (list)
+        //    {
+        //        inListAfter = true;
+        //        return innerHtml;
+        //    }
+        //    else
+        //    {
+        //        inListAfter = true;
+        //        return "<ul>" + innerHtml;
+        //    }
+        //}
 
-        inListAfter = list;
-        return null;
+        //inListAfter = list;
+        //return null;
+        var unorderedListParser = new Markdown.UnorderedListLineParserElement();
+        return unorderedListParser.ParseElement(markdown, list, out inListAfter);
+
     }
 
     private static string ParseParagraph(string markdown, bool list, out bool inListAfter)
