@@ -9,7 +9,7 @@ namespace Markdown
         private IEnumerable<ILineParserElement> _lineParserElements;
         private ILineParserElement _listEndParserElement;
 
-        public MarkdownLineParser() : this(DefaultLineParserElements, new ListEndLineParserElement())
+        public MarkdownLineParser() : this(DefaultLineParserElements, new UnorderedListEndLineParserElement())
         {
 
         }
@@ -41,7 +41,7 @@ namespace Markdown
         {
             get
             {
-                return new List<ILineParserElement> { new ListEndLineParserElement(), new HeaderLineParserElement(), new UnorderedListLineParserElement(), new ParagraphLineParserElement() };
+                return new List<ILineParserElement> { new UnorderedListEndLineParserElement(), new HeaderLineParserElement(), new UnorderedListLineParserElement(), new ParagraphLineParserElement() };
             }
         }
 

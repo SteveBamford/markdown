@@ -2,15 +2,15 @@
 
 namespace Markdown
 {
-    public class ListEndLineParserElementTest
+    public class UnorderedListEndLineParserElementTest
     {
         private const string LIST_END_TEXT = "</ul>";
 
-        private ListEndLineParserElement _sut;
+        private UnorderedListEndLineParserElement _sut;
 
-        public ListEndLineParserElementTest()
+        public UnorderedListEndLineParserElementTest()
         {
-            _sut = new ListEndLineParserElement();
+            _sut = new UnorderedListEndLineParserElement();
         }
 
         [Fact]

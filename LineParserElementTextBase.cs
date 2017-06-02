@@ -8,13 +8,13 @@ namespace Markdown
     {
         private BoldLineParserElement _boldTextParser;
         private ItalicLineParserElement _italicTextParser;
-        private UnorderedListLineParserElement _unorderedListTextParser;
+        private UnorderedListStartLineParserElement _unorderedListStartParser;
 
         public LineParserElementTextBase()
         {
             _boldTextParser = new BoldLineParserElement();
             _italicTextParser = new ItalicLineParserElement();
-            _unorderedListTextParser = new UnorderedListLineParserElement();
+            _unorderedListStartParser = new UnorderedListStartLineParserElement();
         }
 
         protected string ParseTextForUnorderedListEndBoldAndItalic(string markdownText, bool inListBefore)
@@ -22,7 +22,7 @@ namespace Markdown
             bool inListAfter;
             return _italicTextParser.ParseElement(
                     _boldTextParser.ParseElement(
-                            _unorderedListTextParser.ParseElement(
+                            _unorderedListStartParser.ParseElement(
                                 markdownText,
                                 inListBefore,
                                 out inListAfter),

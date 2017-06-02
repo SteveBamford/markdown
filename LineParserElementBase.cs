@@ -9,7 +9,7 @@ namespace Markdown
     {
         protected ILineParserElement _listEndParserElement;
 
-        public LineParserElementBase() : this(new ListEndLineParserElement())
+        public LineParserElementBase() : this(new UnorderedListEndLineParserElement())
         {
         }
 
