@@ -24,14 +24,22 @@ namespace Markdown
         {
             string result = null;
             bool inList = false;
+            string lineResult = null;
             foreach (var line in markdownLines)
             {
-                result += MarkdownStaticToBeRemoved.ParseLine(line, inList, out inList);
-                //foreach (var parserElement in _lineParserElements)
-                //{
-                //    result += parserElement.ParseElement(line, inList, out inList);
-                //}
+                foreach (var parserElement in _lineParserElements)
+                {
+                    lineResult = parserElement.ParseElement(line, inList, out inList);
+                    if (lineResult != null)
+                    {
+                        break;
+                    }
+                }
+                if (lineResult.Equals(line))
+                    throw new ArgumentException("Invalid markdown");
+                result += lineResult;
             }
+
             result += _listEndParserElement.ParseElement("", inList, out inList);
             return result;
 
@@ -41,7 +49,7 @@ namespace Markdown
         {
             get
             {
-                return new List<ILineParserElement> { new UnorderedListEndLineParserElement(), new HeaderLineParserElement(), new UnorderedListLineParserElement(), new ParagraphLineParserElement() };
+                return new List<ILineParserElement> { new HeaderLineParserElement(), new UnorderedListLineParserElement(), new ParagraphLineParserElement() };
             }
         }
 
