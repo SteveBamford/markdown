@@ -21,8 +21,9 @@ namespace Markdown
 
             if (markdownLine.StartsWith(UNORDERED_LIST_MARKDOWN_TEXT))
             {
-                
-                var result = _startTagger.ParseElement(WrapTextInTag(ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine), UNORDERED_LIST_LINE_ITEM_TAG_TEXT), inListBeforeLine);
+                var htmlLine = ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine);
+                htmlLine = WrapTextInTag(htmlLine, UNORDERED_LIST_LINE_ITEM_TAG_TEXT);
+                var result = _startTagger.ParseElement(htmlLine, inListBeforeLine);
                 return new LineParserResult(result.ParsedText, true);
             }
             return new LineParserResult(null, inListBeforeLine);

@@ -24,27 +24,12 @@ namespace Markdown
         {
             string result = null;
             bool inList = false;
-            LineParserResult lineResult = null;
-            foreach (var line in markdownLines)
+            
+            foreach (var markdownLine in markdownLines)
             {
-                foreach (var parserElement in _lineParserElements)
-                {
-                    lineResult = parserElement.ParseElement(line, inList);
-                    if (lineResult.ParsedText != null)
-                    {
-                        inList = lineResult.InList;
-                        break;
-                    }
-                }
-                if (lineResult == null)
-                {
-                    throw new ArgumentException("No line parser elements run.");
-                }
-                else if (lineResult.ParsedText.Equals(line))
-                {
-                    throw new ArgumentException("Invalid markdown");
-                }
+                LineParserResult lineResult = GetLineParserResult(inList, markdownLine);
                 result += lineResult.ParsedText;
+                inList = lineResult.InList;
             }
 
             result += _listEndParserElement.ParseElement("", inList).ParsedText;
@@ -52,11 +37,43 @@ namespace Markdown
 
         }
 
+        private LineParserResult GetLineParserResult(bool inListBeforeLine, string markdownLineText)
+        {
+            LineParserResult lineResult = null;
+            foreach (var parserElement in _lineParserElements)
+            {
+                lineResult = parserElement.ParseElement(markdownLineText, inListBeforeLine);
+                if (lineResult.ParsedText != null)
+                {
+                    break;
+                }
+            }
+            ConsiderExceptionConditions(markdownLineText, lineResult);
+
+            return lineResult;
+        }
+
+        private static void ConsiderExceptionConditions(string markdownLineText, LineParserResult lineResult)
+        {
+            if (lineResult == null)
+            {
+                throw new ArgumentException("No line parser elements run.");
+            }
+            else if (lineResult.ParsedText.Equals(markdownLineText))
+            {
+                throw new ArgumentException("Invalid markdown");
+            }
+        }
+
         private static IEnumerable<ILineParserElement> DefaultLineParserElements
         {
             get
             {
-                return new List<ILineParserElement> { new HeaderLineParserElement(), new UnorderedListLineParserElement(), new ParagraphLineParserElement() };
+                return new List<ILineParserElement> {
+                    new HeaderLineParserElement(),
+                    new UnorderedListLineParserElement(),
+                    new ParagraphLineParserElement()
+                };
             }
         }
 
