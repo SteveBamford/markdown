@@ -25,8 +25,7 @@ namespace Markdown
 
         public string Parse(string markdown)
         {
-            var lines = _lineSplitter.Split(markdown);
-            return _lineParser.ParseLines(lines);
+            return _lineParser.ParseLines(_lineSplitter.Split(markdown));
         }
     }
 }
