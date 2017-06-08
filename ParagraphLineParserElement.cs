@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Markdown
 {
-    public class ParagraphLineParserElement : LineParserElementTextBase
+    public class ParagraphLineParserElement : ParserElementTextBase
     {
         public const string PARAGRAPH_TAG_TEXT = "p";
 
-        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
+        public override ParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
             string parsedLine = markdownLine;
 
@@ -18,7 +18,7 @@ namespace Markdown
             {
                 parsedLine = WrapTextInTag(parsedLine, PARAGRAPH_TAG_TEXT);
             }
-            return new LineParserResult(parsedLine, false);
+            return new ParserResult(parsedLine, false);
         }
 
     }

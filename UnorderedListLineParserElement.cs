@@ -4,19 +4,19 @@ using System.Text;
 
 namespace Markdown
 {
-    public class UnorderedListLineParserElement : LineParserElementTextBase
+    public class UnorderedListLineParserElement : ParserElementTextBase
     {
         public const string UNORDERED_LIST_MARKDOWN_TEXT = "*";
         public const string UNORDERED_LIST_LINE_ITEM_TAG_TEXT = "li";
 
-        private UnorderedListStartLineParserElement _startTagger;
+        private UnorderedListStartParserElement _startTagger;
 
         public UnorderedListLineParserElement()
         {
-            _startTagger = new UnorderedListStartLineParserElement();
+            _startTagger = new UnorderedListStartParserElement();
         }
 
-        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
+        public override ParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
 
             if (markdownLine.StartsWith(UNORDERED_LIST_MARKDOWN_TEXT))
@@ -24,9 +24,9 @@ namespace Markdown
                 var htmlLine = ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine);
                 htmlLine = WrapTextInTag(htmlLine, UNORDERED_LIST_LINE_ITEM_TAG_TEXT);
                 var result = _startTagger.ParseElement(htmlLine, inListBeforeLine);
-                return new LineParserResult(result.ParsedText, true);
+                return new ParserResult(result.ParsedText, true);
             }
-            return new LineParserResult(null, inListBeforeLine);
+            return new ParserResult(null, inListBeforeLine);
         }
     }
 }

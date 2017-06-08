@@ -2,14 +2,14 @@
 
 namespace Markdown
 {
-    public class UnorderedListStartLineParserElementTest
+    public class UnorderedListStartParserElementTest
     {
         private const string LIST_START_TEXT = "<ul>";
-        private UnorderedListStartLineParserElement _sut;
+        private UnorderedListStartParserElement _sut;
 
-        public UnorderedListStartLineParserElementTest()
+        public UnorderedListStartParserElementTest()
         {
-            _sut = new UnorderedListStartLineParserElement();
+            _sut = new UnorderedListStartParserElement();
         }
 
         [Fact]

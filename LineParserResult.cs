@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Markdown
 {
-    public class LineParserResult
+    public class ParserResult
     {
         public string ParsedText { get; private set; }
         public bool InList { get; private set; }
 
-        public LineParserResult(string parsedText, bool inList)
+        public ParserResult(string parsedText, bool inList)
         {
             ParsedText = parsedText;
             InList = inList;

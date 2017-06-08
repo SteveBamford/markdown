@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Markdown
 {
-    public class ItalicLineParserElement : LineParserElementBase
+    public class ItalicParserElement : ParserElementBase
     {
         private const string ITALIC_MARKDOWN_TEXT = "_";
         private const string ITALIC_REPLACEMENT_TEXT = "em";
 
-        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
+        public override ParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
-            return new LineParserResult(
+            return new ParserResult(
                 Parse(markdownLine, ITALIC_MARKDOWN_TEXT, ITALIC_REPLACEMENT_TEXT),
                 inListBeforeLine);
         }

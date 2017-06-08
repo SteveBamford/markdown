@@ -2,15 +2,15 @@
 
 namespace Markdown
 {
-    public class BoldLineParserElementTest
+    public class BoldParserElementTest
     {
         private const string REPLACEMENT_TAG_TEXT = "strong";
 
-        private BoldLineParserElement _sut;
+        private BoldParserElement _sut;
 
-        public BoldLineParserElementTest()
+        public BoldParserElementTest()
         {
-            _sut = new BoldLineParserElement();
+            _sut = new BoldParserElement();
         }
 
         [Fact]

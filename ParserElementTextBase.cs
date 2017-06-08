@@ -4,17 +4,17 @@ using System.Text;
 
 namespace Markdown
 {
-    public abstract class LineParserElementTextBase : LineParserElementBase
+    public abstract class ParserElementTextBase : ParserElementBase
     {
-        private BoldLineParserElement _boldTextParser;
-        private ItalicLineParserElement _italicTextParser;
-        private UnorderedListEndLineParserElement _unorderedListEndParser;
+        private BoldParserElement _boldTextParser;
+        private ItalicParserElement _italicTextParser;
+        private UnorderedListEndParserElement _unorderedListEndParser;
 
-        public LineParserElementTextBase()
+        public ParserElementTextBase()
         {
-            _boldTextParser = new BoldLineParserElement();
-            _italicTextParser = new ItalicLineParserElement();
-            _unorderedListEndParser = new UnorderedListEndLineParserElement();
+            _boldTextParser = new BoldParserElement();
+            _italicTextParser = new ItalicParserElement();
+            _unorderedListEndParser = new UnorderedListEndParserElement();
         }
 
         protected string ParseTextForUnorderedListEndBoldAndItalic(string markdownText, bool inListBefore)

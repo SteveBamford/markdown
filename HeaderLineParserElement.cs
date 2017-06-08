@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Markdown
 {
-    public class HeaderLineParserElement : LineParserElementBase
+    public class HeaderLineParserElement : ParserElementBase
     {
-        public override LineParserResult ParseElement(string markdownLine, bool inListBeforeLine)
+        public override ParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
             int headerCount = GetHeaderCount(markdownLine);
 
             if (headerCount == 0)
             {
-                return new LineParserResult(null, inListBeforeLine);
+                return new ParserResult(null, inListBeforeLine);
             }
 
             var headerTag = "h" + headerCount;
@@ -20,11 +20,11 @@ namespace Markdown
 
             if (inListBeforeLine)
             {
-                return new LineParserResult(_listEndParserElement.ParseElement("", true).ParsedText + headerHtml, false);
+                return new ParserResult(_listEndParserElement.ParseElement("", true).ParsedText + headerHtml, false);
             }
             else
             {
-                return new LineParserResult(headerHtml, false);
+                return new ParserResult(headerHtml, false);
             }
         }
 

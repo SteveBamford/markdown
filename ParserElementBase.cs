@@ -5,20 +5,20 @@ using System.Text.RegularExpressions;
 
 namespace Markdown
 {
-    public abstract class LineParserElementBase : ILineParserElement
+    public abstract class ParserElementBase : IParserElement
     {
-        protected ILineParserElement _listEndParserElement;
+        protected IParserElement _listEndParserElement;
 
-        public LineParserElementBase() : this(new UnorderedListEndLineParserElement())
+        public ParserElementBase() : this(new UnorderedListEndParserElement())
         {
         }
 
-        public LineParserElementBase(ILineParserElement listEndParserElement)
+        public ParserElementBase(IParserElement listEndParserElement)
         {
             _listEndParserElement = listEndParserElement;
         }
 
-        public abstract LineParserResult ParseElement(string markdownLine, bool inListBeforeLine);
+        public abstract ParserResult ParseElement(string markdownLine, bool inListBeforeLine);
 
         protected string WrapTextInTag(string text, string tag)
         {

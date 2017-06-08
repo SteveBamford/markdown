@@ -3,13 +3,13 @@
 
 namespace Markdown
 {
-    public class ItalicLineParserElementTest
+    public class ItalicParserElementTest
     {
-        private ItalicLineParserElement _sut;
+        private ItalicParserElement _sut;
         
-        public ItalicLineParserElementTest()
+        public ItalicParserElementTest()
         {
-            _sut = new ItalicLineParserElement();
+            _sut = new ItalicParserElement();
         }
 
         [Fact]
