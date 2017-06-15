@@ -25,6 +25,7 @@ namespace Markdown
             return $"<{tag}>{text}</{tag}>";
         }
 
+        // method should describe what it returns
         protected string Parse(string markdownText, string delimiter, string tag)
         {
             if (markdownText == null || markdownText.Length == 0)

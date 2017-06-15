@@ -6,6 +6,7 @@ namespace Markdown
 {
     public interface IMarkdownLineSplitter
     {
+        // this name could be more descriptive I think. eg SplitAtNewlines or something
         IEnumerable<string> Split(string markdownText);
     }
 }

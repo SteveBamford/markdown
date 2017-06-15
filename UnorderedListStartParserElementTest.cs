@@ -15,7 +15,7 @@ namespace Markdown
         [Fact]
         public void Parse_not_in_list_adds_start_tag_before_text()
         {
-            bool inListBefore = false;
+            bool inListBefore = false; // probably make const
             string lineText = "some line";
             string expectedText = $"{LIST_START_TEXT}{lineText}";
             Assert.Equal(expectedText, _sut.ParseElement(lineText, inListBefore).ParsedText);

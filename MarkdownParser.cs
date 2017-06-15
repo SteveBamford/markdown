@@ -6,13 +6,16 @@ namespace Markdown
 {
     public class MarkdownParser : IMarkdownParser
     {
+        // make readonly
         private IMarkdownLineSplitter _lineSplitter;
         private IMarkdownLineParser _lineParser;
 
+        // required?
         public MarkdownParser() : this(new MarkdownLineSplitter(), new MarkdownLineParser())
         {
         }
 
+        // required?
         public MarkdownParser(IMarkdownLineSplitter lineSplitter) : this(lineSplitter, new MarkdownLineParser())
         {
         }

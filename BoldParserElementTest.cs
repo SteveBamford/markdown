@@ -2,11 +2,13 @@
 
 namespace Markdown
 {
+    // nice
     public class BoldParserElementTest
     {
         private const string REPLACEMENT_TAG_TEXT = "strong";
 
-        private BoldParserElement _sut;
+        // making things readonly makes them easier to understand / reason about. Not a biggy though, especially in a small test class
+        private readonly BoldParserElement _sut;
 
         public BoldParserElementTest()
         {

@@ -11,8 +11,10 @@ namespace Markdown
         public UnorderedListEndParserElement() : base()
         { }
 
+        // it is clear what this does, which is good, but it is a bit unclear how it should be used. It seems like a special case that would be used in a different way to other IParserElements.
         public ParserResult ParseElement(string markdownLine, bool inListBeforeLine)
         {
+            // use ternary operator
             if (inListBeforeLine)
             {
                 return new ParserResult($"{LIST_END_TEXT}{markdownLine}", false);
