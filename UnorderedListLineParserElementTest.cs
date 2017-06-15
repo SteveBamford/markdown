@@ -12,12 +12,14 @@ namespace Markdown
             _sut = new UnorderedListLineParserElement();
         }
 
+        // these are good tests that describe what the code is expected to do.
         [Fact]
         public void Parse_unordered_list_item_not_in_list_before_starts_with_ul_tag()
         {
             string lineText = "List";
             string markdownLine = $"* {lineText}";
             string expectedText = $"<ul><li>{lineText}</li>";
+            // maybe have an IsInList variable instead of passing false, its a key part of the test
             Assert.Equal(expectedText, _sut.ParseElement(markdownLine, false).ParsedText);
         }
 

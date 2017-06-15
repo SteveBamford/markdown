@@ -6,6 +6,7 @@ namespace Markdown
 {
     public class MarkdownLineParser : IMarkdownLineParser
     {
+        // make readonly
         private IEnumerable<IParserElement> _lineParserElements;
         private IParserElement _listEndParserElement;
 
@@ -27,7 +28,9 @@ namespace Markdown
             
             foreach (var markdownLine in markdownLines)
             {
-                ParserResult lineResult = GetLineParserResult(inList, markdownLine);
+                // use var
+                var lineResult = GetLineParserResult(inList, markdownLine);
+                // is this a bug, looks like it would be null?
                 result += lineResult.ParsedText;
                 inList = lineResult.InList;
             }
@@ -42,6 +45,7 @@ namespace Markdown
             ParserResult lineResult = null;
             foreach (var parserElement in _lineParserElements)
             {
+                // a canParse / DoParse pattern would make this more readable
                 lineResult = parserElement.ParseElement(markdownLineText, inListBeforeLine);
                 if (lineResult.ParsedText != null)
                 {
@@ -65,6 +69,7 @@ namespace Markdown
             }
         }
 
+        // maybe have a different interface for line parsers and other types of parser
         private static IEnumerable<IParserElement> DefaultLineParserElements
         {
             get

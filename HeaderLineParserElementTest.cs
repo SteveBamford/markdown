@@ -1,10 +1,10 @@
 ﻿using Xunit;
 
+// this is picky, but I might put the tests in their own namespace
 namespace Markdown
 {
     public class HeaderLineParserElementTest
     {
-
         private HeaderLineParserElement _sut;
 
         public HeaderLineParserElementTest()
@@ -12,14 +12,17 @@ namespace Markdown
             _sut = new HeaderLineParserElement();
         }
 
+        // looks good, I would probably put some blank lines to separate the various sections
         [Fact]
         public void Parse_top_level_header_line()
         {
             string headerText = "Header 1";
-            string markdownLine = $"# {headerText}";
-            string htmlLine = $"<h1>{headerText}</h1>";
-            var result = _sut.ParseElement(markdownLine, false);
-            Assert.Equal(htmlLine, result.ParsedText);
+            string markdownH1Line = $"# {headerText}";
+            string htmlH1Line = $"<h1>{headerText}</h1>";
+
+            var result = _sut.ParseElement(markdownH1Line, false);
+
+            Assert.Equal(htmlH1Line, result.ParsedText);
             Assert.False(result.InList);
         }
 

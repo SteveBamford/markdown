@@ -4,6 +4,7 @@ using System.Text;
 
 namespace Markdown
 {
+    //todo: in terms of single responsibility, this class also has the responsibility of writing out a closing tag for a different element, so this should be removed.
     public class ParagraphLineParserElement : ParserElementTextBase
     {
         public const string PARAGRAPH_TAG_TEXT = "p";

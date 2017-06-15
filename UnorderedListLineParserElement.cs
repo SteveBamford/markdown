@@ -23,6 +23,7 @@ namespace Markdown
             {
                 var htmlLine = ParseTextForBoldAndItalic(markdownLine.Substring(2), inListBeforeLine);
                 htmlLine = WrapTextInTag(htmlLine, UNORDERED_LIST_LINE_ITEM_TAG_TEXT);
+                // this adds in the first <UL> I guess? Could probably have a better name. Including the "if inListBeforeLine" statement in this method might make it clearer
                 var result = _startTagger.ParseElement(htmlLine, inListBeforeLine);
                 return new ParserResult(result.ParsedText, true);
             }
